@@ -1,20 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import {NextIntlClientProvider} from "next-intl";
 import {getMessages} from "next-intl/server";
 import {routing} from "@/i18n/routing";
 import {notFound} from "next/navigation";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
+import ThemeDataProvider from "../../../context/theme-data-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -34,12 +25,14 @@ export default async function RootLayout({children, params}: {
     const messages = await getMessages();
 
     return (
-      <html lang={locale}>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+      <html lang={locale} suppressHydrationWarning>
+        <body>
         <NextIntlClientProvider messages={messages}>
-          {children}
+            <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+                <ThemeDataProvider>
+                    {children}
+                </ThemeDataProvider>
+            </NextThemesProvider>
         </NextIntlClientProvider>
         </body>
       </html>
