@@ -6,6 +6,8 @@ import {routing} from "@/i18n/routing";
 import {notFound} from "next/navigation";
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
 import ThemeDataProvider from "../../../context/theme-data-provider";
+import {AppSidebar} from "@/components/AppSidebar";
+import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,7 +32,13 @@ export default async function RootLayout({children, params}: {
         <NextIntlClientProvider messages={messages}>
             <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
                 <ThemeDataProvider>
-                    {children}
+                    <SidebarProvider>
+                        <AppSidebar />
+                        <main>
+                            <SidebarTrigger />
+                            {children}
+                        </main>
+                    </SidebarProvider>
                 </ThemeDataProvider>
             </NextThemesProvider>
         </NextIntlClientProvider>
