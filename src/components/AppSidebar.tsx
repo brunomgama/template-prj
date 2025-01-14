@@ -1,5 +1,4 @@
 import {Calendar, Home, Inbox, Search, Settings} from "lucide-react"
-
 import {
     Sidebar,
     SidebarContent, SidebarFooter,
@@ -13,6 +12,7 @@ import {
 import {ThemeModeToggle} from "@/components/theme-mode-toggle";
 import {ThemeColorToggle} from "@/components/theme-color-toggle";
 import {LanguageToggle} from "@/components/language-toggle";
+import AppCalendar from "@/components/AppCalendar";
 
 const items = [
     {
@@ -45,8 +45,6 @@ const items = [
 export function AppSidebar() {
     return (
         <Sidebar collapsible="icon">
-
-
             <SidebarContent className="flex flex-col h-full">
                 <SidebarGroup>
                     <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -66,10 +64,13 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <SidebarFooter className="mt-auto flex flex-col items-center space-y-2">
-                    <LanguageToggle />
-                    <ThemeModeToggle />
+                    <div className="overflow-hidden">
+                        <AppCalendar/>
+                    </div>
+                    <LanguageToggle/>
+                    <ThemeModeToggle/>
                     <div className="w-full flex justify-center">
-                        <ThemeColorToggle />
+                        <ThemeColorToggle/>
                     </div>
                 </SidebarFooter>
             </SidebarContent>

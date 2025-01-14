@@ -22,14 +22,7 @@ export function ThemeColorToggle() {
         return availableThemeColors.map(({ name, light, dark }) => (
             <SelectItem key={name} value={name}>
                 <div className="flex items-center space-x-3">
-                    <div
-                        className={cn(
-                            "rounded-full",
-                            "w-[20px]",
-                            "h-[20px]",
-                            theme === "light" ? light : dark
-                        )}
-                    ></div>
+                    <div className={cn("rounded-full", "w-[20px]", "h-[20px]", theme === "light" ? light : dark)} />
                     <span className="text-sm group-data-[collapsible=icon]:hidden">{name}</span>
                 </div>
             </SelectItem>
