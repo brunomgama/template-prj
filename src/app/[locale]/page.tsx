@@ -8,45 +8,17 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
-import {ThemeModeToggle} from "@/components/theme-mode-toggle";
-import {ThemeColorToggle} from "@/components/theme-color-toggle";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
 
 export default function Home() {
-    const router = useRouter();
     const t = useTranslations("Home");
-    const [locale, setLocale] = useState("en");
-
-    const handleChangeLocale = (newLocale: string) => {
-        setLocale(newLocale);
-        router.push(`/${newLocale}`);
-    };
 
     return (
         <div>
             <h1>{t('title')}</h1>
-
-            <div className={"ml-6 mt-6"}>
-                <Select onValueChange={handleChangeLocale}>
-                    <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Language" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="en">English</SelectItem>
-                        <SelectItem value="es">Spanish</SelectItem>
-                    </SelectContent>
-                </Select>
-
-
-                <ThemeModeToggle/>
-                <ThemeColorToggle/>
-            </div>
-
 
             <div>
 
