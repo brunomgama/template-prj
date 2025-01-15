@@ -29,3 +29,10 @@ export const tasks = pgTable("tasks", {
       categoryId: integer("category_id").notNull().references(() => categories.id, { onDelete: "cascade" }),
     },
 );
+
+export const foodElements = pgTable("food_elements", {
+    id: serial("id").primaryKey(),
+    name: text("name"),
+    quantity: integer("quantity"),
+    categoryId: integer("category_id").notNull().references(() => categories.id, { onDelete: "cascade" }),
+})
