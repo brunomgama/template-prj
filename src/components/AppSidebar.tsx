@@ -1,48 +1,44 @@
-import {Calendar, Home, Inbox, Search, Settings} from "lucide-react"
+"use client";
+
+import { useLocale } from "next-intl";
+import { TbHome, TbApple, TbAffiliate } from "react-icons/tb";
 import {
     Sidebar,
-    SidebarContent, SidebarFooter,
+    SidebarContent,
+    SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import {ThemeModeToggle} from "@/components/theme-mode-toggle";
-import {ThemeColorToggle} from "@/components/theme-color-toggle";
-import {LanguageToggle} from "@/components/language-toggle";
+} from "@/components/ui/sidebar";
+import { ThemeModeToggle } from "@/components/theme-mode-toggle";
+import { ThemeColorToggle } from "@/components/theme-color-toggle";
+import { LanguageToggle } from "@/components/language-toggle";
 import AppCalendar from "@/components/AppCalendar";
+import {Link} from "@/i18n/routing";
 
 const items = [
     {
         title: "Home",
-        url: "#",
-        icon: Home,
+        url: "/",
+        icon: TbHome,
     },
     {
-        title: "Inbox",
-        url: "#",
-        icon: Inbox,
+        title: "Storage",
+        url: "/food",
+        icon: TbApple,
     },
     {
-        title: "Calendar",
-        url: "#",
-        icon: Calendar,
-    },
-    {
-        title: "Search",
-        url: "#",
-        icon: Search,
-    },
-    {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
+        title: "Category",
+        url: "/categories",
+        icon: TbAffiliate,
     },
 ]
 
 export function AppSidebar() {
+    const locale = useLocale();
     return (
         <Sidebar collapsible="icon">
             <SidebarContent className="flex flex-col h-full">
@@ -53,10 +49,10 @@ export function AppSidebar() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Link href={item.url} locale={locale}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
