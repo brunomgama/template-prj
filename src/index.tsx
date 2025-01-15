@@ -1,27 +1,31 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import {tasks, users} from './db/schema';
+import { users, categories, tasks } from './db/schema';
 
 async function main() {
     const connectionString = process.env.DATABASE_URL!;
     const client = postgres(connectionString, { prepare: false });
     const db = drizzle(client);
 
-    // Insert a row
-    await db.insert(users).values({
-        fullName: 'Bruno_Gama',
+    const insertedUsers = await db.insert(users).values({
+        name: 'Bruno Gama',
         email: 'bmogama@gmail.com',
-    });
+    }).returning();
+
+    const insertedCategories = await db.insert(categories).values({
+        name: 'Errands',
+    }).returning();
 
     await db.insert(tasks).values({
         title: 'compras',
-        userId: 1,
+        dueDate: '2025-01-01',
+        userId: insertedUsers[0].id,
+        categoryId: insertedCategories[0].id,
     });
 
-    // Fetch rows just to confirm
-    const allUsers = await db.select().from(users);
-    console.log(allUsers);
+    const allTasks = await db.select().from(tasks);
+    console.log('All tasks:', allTasks);
 
     await client.end();
 }

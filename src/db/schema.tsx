@@ -1,15 +1,31 @@
-import { pgTable, serial, text, varchar, integer } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  serial,
+  text,
+  varchar,
+  integer,
+  date,
+} from "drizzle-orm/pg-core";
 
-// Example "users" table
+// Users table
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  fullName: text("full_name"),
+  name: text("name"),
   email: text("email"),
 });
 
-// Example "tasks" table
-export const tasks = pgTable("tasks", {
+// Categories table
+export const categories = pgTable("categories", {
   id: serial("id").primaryKey(),
-  title: text("title"),
-  userId: integer("user_id"),
+  name: varchar("name", { length: 100 }),
 });
+
+// Tasks table
+export const tasks = pgTable("tasks", {
+      id: serial("id").primaryKey(),
+      title: text("title"),
+      dueDate: date("due_date"),
+      userId: integer("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+      categoryId: integer("category_id").notNull().references(() => categories.id, { onDelete: "cascade" }),
+    },
+);
