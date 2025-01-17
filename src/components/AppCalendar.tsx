@@ -1,9 +1,9 @@
 "use client";
 
-import { Calendar } from "@/components/ui/calendar"
 import React from "react";
 import {useSidebar} from "@/components/ui/sidebar";
 import moment from "moment";
+import {Calendar} from "@/components/ui/simple_calendar";
 
 export default function AppCalendar() {
     const { open } = useSidebar()
