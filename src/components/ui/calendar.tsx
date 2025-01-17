@@ -15,7 +15,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { getDay, getDaysInMonth, isSameDay } from 'date-fns';
+import { getDay, getDaysInMonth } from 'date-fns';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { type ReactNode, createContext, useContext, useState } from 'react';
@@ -211,7 +211,6 @@ export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
           const start = new Date(feature.start_date);
           const end = new Date(feature.end_date);
 
-          // Zero out hours/minutes/seconds for a pure date comparison if you want:
           currentDay.setHours(0, 0, 0, 0);
           start.setHours(0, 0, 0, 0);
           end.setHours(0, 0, 0, 0);

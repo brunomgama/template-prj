@@ -4,7 +4,7 @@ import postgres from 'postgres';
 import { event } from '@/db/schema';
 
 const client = postgres(process.env.DATABASE_URL!);
-export const db = drizzle({ client });
+const db = drizzle({ client });
 
 export async function GET() {
     const events = await db.select().from(event);

@@ -12,8 +12,6 @@ import {
     CalendarProvider,
 } from "@/components/ui/calendar";
 
-type CalendarExampleProps = {};
-
 type Status = {
     id: string;
     name: string;
@@ -28,8 +26,16 @@ type Feature = {
     status: Status;
 };
 
-const CalendarExample: React.FC<CalendarExampleProps> = () => {
-    const [events, setEvents] = useState<any[]>([]);
+interface DBEvent {
+    id: number;
+    name: string;
+    start_date: string;
+    end_date: string;
+    category_id?: number | null;
+}
+
+const CalendarExample: React.FC = () => {
+    const [events, setEvents] = useState<DBEvent[]>([]);
 
     useEffect(() => {
         const fetchEvents = async () => {
