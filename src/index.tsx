@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import {users, categories, tasks, foodElements} from './db/schema';
+import {users, categories, tasks, foodElements, event} from './db/schema';
 
 async function main() {
     const connectionString = process.env.DATABASE_URL!;
@@ -11,6 +11,17 @@ async function main() {
     const insertedUsers = await db.insert(users).values({
         name: 'Bruno Gama',
         email: 'bmogama@gmail.com',
+    }).returning();
+
+    const insertHolidays = await db.insert(categories).values({
+        name: 'Férias',
+    }).returning();
+
+    await db.insert(event).values({
+        name: 'Snowboard',
+        start_date: '2025-02-19',
+        end_date: '2025-02-23',
+        category_id: insertHolidays[0].id,
     }).returning();
 
     const insertedCategories = await db.insert(categories).values({

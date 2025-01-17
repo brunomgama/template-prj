@@ -14,6 +14,14 @@ export const users = pgTable("users", {
   email: text("email"),
 });
 
+export const event = pgTable("event", {
+    id: serial("id").primaryKey(),
+    name: varchar("name", { length: 100 }),
+    start_date: date("start_date"),
+    end_date: date("end_date"),
+    category_id: integer("category_id").notNull().references(() => categories.id, { onDelete: "cascade" }),
+});
+
 // Categories table
 export const categories = pgTable("categories", {
   id: serial("id").primaryKey(),
