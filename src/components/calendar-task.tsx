@@ -34,7 +34,7 @@ interface DBEvent {
     category_id?: number | null;
 }
 
-const CalendarExample: React.FC = () => {
+const BigCalendar: React.FC = () => {
     const [events, setEvents] = useState<DBEvent[]>([]);
 
     useEffect(() => {
@@ -78,4 +78,4 @@ const CalendarExample: React.FC = () => {
     );
 };
 
-export { CalendarExample };
+export { BigCalendar };

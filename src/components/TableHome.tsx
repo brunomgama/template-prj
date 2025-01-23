@@ -47,7 +47,6 @@ export default function TableHome() {
                     <TableHead>Name</TableHead>
                     <TableHead>Start Date</TableHead>
                     <TableHead>End Date</TableHead>
-                    <TableHead>Category</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -57,7 +56,6 @@ export default function TableHome() {
                         <TableCell>{task.name}</TableCell>
                         <TableCell>{task.start_date}</TableCell>
                         <TableCell>{task.end_date}</TableCell>
-                        <TableCell>{task.category_id}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>

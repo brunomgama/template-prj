@@ -206,6 +206,14 @@ export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
   }
 
   for (let day = 1; day <= daysInMonth; day++) {
+      const currentDay = new Date(year, month, day);
+
+      const today = new Date();
+      currentDay.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+
+      const isToday = currentDay.getTime() === today.getTime();
+
       const featuresForDay = features.filter((feature) => {
           const currentDay = new Date(year, month, day);
           const start = new Date(feature.start_date);
@@ -218,22 +226,29 @@ export const CalendarBody = ({ features, children }: CalendarBodyProps) => {
           return currentDay >= start && currentDay <= end;
       });
 
-    days.push(
-        <div
-            key={day}
-            className="relative flex h-full w-full flex-col gap-1 p-1 text-muted-foreground text-xs"
-        >
-          {day}
-          <div>
-            {featuresForDay.slice(0, 3).map((feature) => children({ feature }))}
+      days.push(
+          <div
+              key={day}
+              className={cn("relative flex h-full w-full flex-col gap-1 p-1 text-muted-foreground text-xs")}>
+              { isToday ? (
+                  <span className={isToday ? "text-red-700" : ""}>
+                      Today ({day})
+                  </span>
+                  ) : (
+                  <span>
+                      {day}
+                  </span>
+              )}
+              <div>
+                  {featuresForDay.slice(0, 3).map((feature) => children({feature }))}
+              </div>
+              {featuresForDay.length > 3 && (
+                  <span className="block text-muted-foreground text-xs">
+          +{featuresForDay.length - 3} more
+        </span>
+              )}
           </div>
-          {featuresForDay.length > 3 && (
-              <span className="block text-muted-foreground text-xs">
-            +{featuresForDay.length - 3} more
-          </span>
-          )}
-        </div>
-    );
+      );
   }
 
   const nextMonth = month === 11 ? 0 : month + 1;

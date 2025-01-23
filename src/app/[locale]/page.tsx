@@ -1,23 +1,22 @@
+import {BigCalendar} from "@/components/calendar-task";
 import TableHome from "@/components/TableHome";
-import { CalendarExample } from "@/components/calendar-task";
-import { Button } from "@/components/ui/button";
+import EventCreateDialog from "@/components/Events/EventCreateDialog";
 
 export default function Home() {
     return (
         <div>
             <div className="flex justify-end mb-4">
-                <Button>Button</Button>
+                <EventCreateDialog/>
             </div>
 
             <div className="flex flex-col gap-4 [@media(min-width:1035px)]:flex-row">
                 <div className="flex-1">
-                    <CalendarExample/>
+                    <BigCalendar/>
                 </div>
                 <div className="flex-1">
                     <TableHome/>
                 </div>
             </div>
-
         </div>
     );
 }
